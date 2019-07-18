@@ -22,22 +22,27 @@ MAX_BRIGHTNESS_PATH = os.path.join(BACKLIGHT_PATH, 'max_brightness')
 CWD = os.path.dirname(__file__)
 
 LOCK = threading.Lock()
+DEVICE_ID = None
 
 def get_device_id():
-    # xrandr | grep "connected primary" | cut -d" " -f1
-    xrandr = subprocess.Popen(['xrandr'], stdout=subprocess.PIPE)
-    grep = subprocess.Popen(['grep', 'connected primary'], stdin=xrandr.stdout, stdout=subprocess.PIPE)
-    cut = subprocess.Popen(['cut', '-d', ' ', '-f', '1'], stdin=grep.stdout, stdout=subprocess.PIPE)
-    xrandr.stdout.close()
-    grep.communicate()
-    return cut.communicate()[0].decode('ascii').rstrip()
+    global DEVICE_ID
+    if DEVICE_ID is None:
+        # xrandr | grep "connected primary" | cut -d" " -f1
+        xrandr = subprocess.Popen(['xrandr'], stdout=subprocess.PIPE)
+        grep = subprocess.Popen(['grep', 'connected primary'], stdin=xrandr.stdout, stdout=subprocess.PIPE)
+        cut = subprocess.Popen(['cut', '-d', ' ', '-f', '1'], stdin=grep.stdout, stdout=subprocess.PIPE)
+        xrandr.stdout.close()
+        grep.communicate()
+        DEVICE_ID = cut.communicate()[0].decode('ascii').rstrip()
+    return DEVICE_ID
 
-PRIMARY_DEVICE_ID = get_device_id()
 
 def xrandr_brightness(brightness, max_brightness):
     xrandr_brightness = float(brightness) / float(max_brightness)
     logging.debug('Apply brightness %s (from %s/%s)', xrandr_brightness, brightness, max_brightness)
-    subprocess.call(['xrandr', '--output', PRIMARY_DEVICE_ID, '--brightness', str(xrandr_brightness)])
+    device_id = get_device_id()
+    if device_id != None:
+        subprocess.call(['xrandr', '--output', device_id, '--brightness', str(xrandr_brightness)])
 
 
 def xrandr_brightness_apply():
@@ -92,4 +97,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
