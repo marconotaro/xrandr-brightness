@@ -37,6 +37,18 @@ def get_device_id():
     return DEVICE_ID
 
 
+# Full disclosure... I'm not new to programming but I'm a complete Python noob.
+# I recognize the terrible pattern of code in the following lines, and will clean it up when I know Python better.
+for x in range(5):
+    if get_device_id() != None:
+        break
+    time.sleep(1)
+
+if DEVICE_ID is None:
+    print("Unable to get the primary device ID name from xrandr after 5 tries...aborting!")
+    exit(-1)
+
+
 def xrandr_brightness(brightness, max_brightness):
     xrandr_brightness = float(brightness) / float(max_brightness)
     logging.debug('Apply brightness %s (from %s/%s)', xrandr_brightness, brightness, max_brightness)
