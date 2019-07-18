@@ -2,6 +2,6 @@
 Type=Application
 Name=XRandR Brightness
 Comment=Control OLED display brightness by running xrandr commands.
-Exec=xrandr-brightness watch
+Exec=/usr/local/bin/xrandr-brightness watch
 Terminal=false
 X-GNOME-Autostart-enabled=true
