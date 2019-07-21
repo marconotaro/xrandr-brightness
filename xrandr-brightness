@@ -34,6 +34,8 @@ def get_device_id():
         xrandr.stdout.close()
         grep.communicate()
         DEVICE_ID = cut.communicate()[0].decode('ascii').rstrip()
+        if DEVICE_ID == "":
+            DEVICE_ID = None
     return DEVICE_ID
 
 
