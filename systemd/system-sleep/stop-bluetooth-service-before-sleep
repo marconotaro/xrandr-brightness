@@ -1,0 +1,14 @@
+#!/bin/sh
+# Makes sure bluetooth service is not running while suspended.
+# In Ubuntu, there seems to be a bug where the system will wake up from sleep
+# immediately if BT is active and a device is connected.
+# https://askubuntu.com/a/1124301
+
+case $1 in
+  pre)
+    service bluetooth stop
+    ;;
+  post)
+    service bluetooth start
+    ;;
+esac
