@@ -1,5 +1,3 @@
-const setBrightness = require('./setBrightness')
-const watchBrightness = require('./watchBrightness')
-const applyCurrentBrightness = require('./applyCurrentBrightness')
+const main = require('./main')
 
-applyCurrentBrightness()
+main()
