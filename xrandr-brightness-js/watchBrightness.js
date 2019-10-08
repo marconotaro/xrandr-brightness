@@ -1,10 +1,5 @@
-const path = require('path')
 const fs = require('fs')
-
-const defaultSettings = {}
-defaultSettings.backlightPath = '/sys/class/backlight/intel_backlight'
-defaultSettings.brightnessPath = path.join(defaultSettings.backlightPath, 'brightness')
-defaultSettings.maxBrightessPath = path.join(defaultSettings.backlightPath, 'max_brightness')
+const defaultSettings = require('./defaultBrightnessPaths')
 
 const watchBrightness = function (callback, settings = defaultSettings) {
   if (typeof callback !== 'function') {
