@@ -1,3 +1,3 @@
-const getDeviceId = require('./getDeviceId')
+const setBrightness = require('./setBrightness')
 
-console.log(getDeviceId())
+setBrightness(7, 10)
