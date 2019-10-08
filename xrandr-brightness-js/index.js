@@ -1,4 +1,5 @@
 const setBrightness = require('./setBrightness')
 const watchBrightness = require('./watchBrightness')
+const applyCurrentBrightness = require('./applyCurrentBrightness')
 
-watchBrightness(console.log)
+applyCurrentBrightness()
