@@ -1,0 +1,14 @@
+{
+  "name": "xrandr-brightness",
+  "version": "0.0.1-alpha.1",
+  "description": "A utility intended to controll OLED display brightness by running xrandr commands.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dannel Albert <cuebix@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.8.3"
+  }
+}
