@@ -14,7 +14,8 @@ const main = function () {
       applyCurrentBrightness()
     }
   } else if (hasArgs && args[0].trim().toLowerCase() === 'watch') {
-    watchBrightness(() => applyCurrentBrightness)
+    applyCurrentBrightness()
+    watchBrightness(() => applyCurrentBrightness())
   } else {
     showUsage()
   }
