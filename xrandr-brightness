@@ -56,6 +56,7 @@ def xrandr_brightness(brightness, max_brightness):
     logging.debug('Apply brightness %s (from %s/%s)', xrandr_brightness, brightness, max_brightness)
     device_id = get_device_id()
     if device_id != None:
+        time.sleep(0.25)
         subprocess.call(['xrandr', '--output', device_id, '--brightness', str(xrandr_brightness)])
 
 

@@ -1,0 +1,8 @@
+#!/bin/sh
+case $1 in
+  post)
+    sleep 5
+    XRANDR_USER=`ps u | grep xrandr-brightness | cut -d" " -f1`
+    sudo -u $XRANDR_USER $(which xrandr-brightness) apply
+    ;;
+esac
