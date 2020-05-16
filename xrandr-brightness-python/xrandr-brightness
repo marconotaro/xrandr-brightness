@@ -29,7 +29,8 @@ def get_device_id():
     if DEVICE_ID is None:
         # xrandr | grep "connected primary" | cut -d" " -f1
         xrandr = subprocess.Popen(['xrandr'], stdout=subprocess.PIPE)
-        grep = subprocess.Popen(['grep', 'connected primary'], stdin=xrandr.stdout, stdout=subprocess.PIPE)
+        grep = subprocess.Popen(['grep', '-v', 'HDMI'], stdin=xrandr.stdout, stdout=subprocess.PIPE)
+        grep = subprocess.Popen(['grep', 'connected primary'], stdin=grep.stdout, stdout=subprocess.PIPE)
         cut = subprocess.Popen(['cut', '-d', ' ', '-f', '1'], stdin=grep.stdout, stdout=subprocess.PIPE)
         xrandr.stdout.close()
         grep.communicate()
